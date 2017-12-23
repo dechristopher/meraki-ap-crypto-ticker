@@ -32,7 +32,7 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 ]
 ```
 
-6. Use the organization ID you just pulled to find the network ID of the network that contains the SSID you're using for the ticker:
+6. Use the organization ID you just pulled to find the network ID of the network that contains the SSID you're using for the ticker. Be sure you fill in the API key and organization ID before running the command:
 
 ```bash
 curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/json' 'https://api.meraki.com/api/v0/organizations/[organizationId]
@@ -62,7 +62,7 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 {
     "apikey": "API_KEY_HERE",
     "networkid": "NETWORK_ID_HERE",
-    "ssidnum": "SSID_NUMBER_HERE"
+    "ssidnum": "SSID_NUMBER_HERE",
     ...
 }
 ```
@@ -74,8 +74,8 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
     "apikey": "API_KEY_HERE",
     "networkid": "NETWORK_ID_HERE",
     "ssidnum": "SSID_NUMBER_HERE",
-    "btc": (true/false),
-    "eth": (true/false)
+    "btc": true,
+    "eth": true,
     ...
 }
 ```
