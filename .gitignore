@@ -15,3 +15,7 @@
 
 # The build directory
 build/
+
+# Configration
+config.json
+src/config.json
