@@ -1,0 +1,8 @@
+{
+    "apikey": "API_KEY_HERE",
+    "networkid": "NETWORK_ID_HERE",
+    "ssidnum": "SSID_NUMBER_HERE",
+    "btc": true,
+    "eth": false,
+    "interval": 5
+}
