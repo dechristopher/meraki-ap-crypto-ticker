@@ -85,8 +85,18 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 12. Within seconds you should see the SSID set to the current crypto prices that you have enabled formatted like this:
 
 ```text
+BOTH Enabled:
+
 [BTC ↑ $13.4k] [ETH ↑ $481]
+
+Only one enabled:
+
+(BTC) ↑ $13,416 [+7.4%]
+or
+(ETH) ↑ $481 [+9.1%]
 ```
+
+
 
 ## Information
 
