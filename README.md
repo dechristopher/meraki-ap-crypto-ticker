@@ -96,8 +96,6 @@ or
 (ETH) ↑ $481 [+9.1%]
 ```
 
-
-
 ## Information
 
 By default the application updates the prices once every five minutes. This can be changed using the *interval* configuration option. The value is set in minutes.
