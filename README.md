@@ -56,7 +56,7 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 8. Now you'll need to find the SSID number of the SSID that'll act as the ticker. This one's easy. Just go in and edit the SSID's settings and the number will be in the last part of the URL as shown here:
 ![alt text](img/url.png "Enable API")
 
-9. At this point we have the information to allow the application to do its business. Take your Meraki API key and the NetworkID and SSID number we gathered and store them in the config.json as such:
+9. At this point we have the information to allow the application to do its business. Make a copy of the config.example.json and call it config.json. Take your Meraki API key along with the NetworkID and SSID number we gathered and store them in the config.json as such:
 
 ```json
 {
@@ -67,7 +67,7 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 }
 ```
 
-10. Enable the cryptocurrencies you'd like to see using the other configuration options in config.json, setting them to true as shown here:
+10. Enable the cryptocurrencies you'd like to see and set your currency code using the other configuration options in config.json, setting them to true as shown here:
 
 ```json
 {
@@ -76,11 +76,16 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
     "ssidnum": "SSID_NUMBER_HERE",
     "btc": true,
     "eth": true,
+    "currency": "USD",
     ...
 }
 ```
 
-11. We're home free! Just build the application using **tools/build-(platform).sh** and run the application using **./build/ticker**
+```bash
+Supported currency codes are: "AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR"
+````
+
+11. We're home free! Just build the application using **tools/build-(platform).sh** and run the application using **./ticker** located in the build directory
 
 12. Within seconds you should see the SSID set to the current crypto prices that you have enabled formatted like this:
 
