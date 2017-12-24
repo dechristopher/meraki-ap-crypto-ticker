@@ -2,7 +2,7 @@
 echo "[ticker] Building darwin binary..."
 
 # Enter src/ directory after resetting working directory to tools/
-+
+
 cd "${0%/*}"
 cd ../src
 
