@@ -4,5 +4,6 @@
     "ssidnum": "SSID_NUMBER_HERE",
     "btc": true,
     "eth": false,
+    "currency": "USD",
     "interval": 5
 }
