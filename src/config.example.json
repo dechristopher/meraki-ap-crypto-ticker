@@ -5,5 +5,5 @@
     "btc": true,
     "eth": false,
     "currency": "USD",
-    "interval": 5
+    "interval": 1
 }
