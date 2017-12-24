@@ -1,7 +1,9 @@
 # Meraki AP SSID Cryptocurrency Ticker
 
 Ever wanted BTC or ETH prices available at a moment's notice from any WiFi enabled device? Look no further!
+
 ![alt text](img/header.jpg "HEADER")
+
 This application uses the Cisco Meraki Cloud APIs to set the SSID of a wireless network you control to the current BTC and/or ETH price with their current upward or downward 24-hour trend and percent change. Any and all cryptocurrency information is pulled from CoinMarketCap's public API and formatted one of many available national currencies.
 
 ## Modes
