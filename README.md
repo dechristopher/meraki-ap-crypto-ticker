@@ -2,7 +2,15 @@
 
 Ever wanted BTC or ETH prices available at a moment's notice from any WiFi enabled device? Look no further!
 
-This application uses the Cisco Meraki cloud APIs to set the SSID of a wireless network you control to the current BTC and/or ETH price with their current upward or downward trend calculated hourly.
+This application uses the Cisco Meraki cloud APIs to set the SSID of a wireless network you control to the current BTC and/or ETH price with their current upward or downward 24-hour trend.
+
+## Modes
+
+The ticker can be run in one of two modes:
+
+- **Cron Mode**: run the application as a one-off command in intervals from your system crontab using the *-cron* flag
+
+- **Service Mode**: run the application with no flags and background it so it'll run forever (or until it hits an error and crashes...)
 
 ## Configuration
 
@@ -83,7 +91,7 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 
 ```bash
 Supported currency codes are: "AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR"
-````
+```
 
 11. We're home free! Just build the application using **tools/build-(platform).sh** and run the application using **./ticker** located in the build directory
 
@@ -103,4 +111,4 @@ or
 
 ## Information
 
-By default the application updates the prices once every five minutes. This can be changed using the *interval* configuration option. The value is set in minutes.
+By default the application updates the prices once every minute. This can be changed using the *interval* configuration option. The value is set in minutes.
