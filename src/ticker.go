@@ -11,7 +11,7 @@ import (
 	"time"
 
 	u "github.com/dechristopher/meraki-ap-crypto-ticker/src/util"
-	cron "github.com/robfig/cron"
+	cron "github.com/jasonlvhit/gocron"
 )
 
 var (
@@ -19,12 +19,10 @@ var (
 	BTCPrice = "0"
 	// BTCTrendPCT percent change 24h
 	BTCTrendPCT = ""
-
 	// ETHPrice is current ETH price
 	ETHPrice = "0"
 	// ETHTrendPCT percent change 24h
 	ETHTrendPCT = ""
-
 	// BothCoins is set if both coins are enabled
 	BothCoins = false
 )
@@ -57,9 +55,17 @@ func main() {
 	}
 
 	// Otherwise, we start the service to run on the specified interval
-	c := cron.New()
-	c.AddFunc("0 */"+strconv.Itoa(u.Conf.UpdateInterval)+" * * * *", func() { setTicker() })
-	c.Start()
+	setTicker() // do it upon invocation and then wait the interval
+
+	if interval, errParse := strconv.ParseUint(strconv.Itoa(u.Conf.UpdateInterval), 10, 64); errParse != nil {
+		u.LogErr(errParse.Error())
+		os.Exit(1)
+		return
+	} else {
+		cron.Every(interval).Minutes().Do(setTicker)
+		u.Log("Started! " + strconv.Itoa(u.Conf.UpdateInterval) + " minute update intervals.")
+		<-cron.Start()
+	}
 }
 
 // Hits the Meraki API to set the ticker SSID
@@ -74,7 +80,7 @@ func setTicker() {
 	u.Log("Setting ticker...")
 
 	ssidName := u.GenSSID(BTCPrice, BTCTrendPCT, ETHPrice, ETHTrendPCT, BothCoins)
-	fmt.Println("SSID: " + ssidName)
+	u.Log("SETTING: " + ssidName)
 
 	var jsonStr = []byte(`{"name":"` + ssidName + `", "enabled": true}`)
 	req, err := http.NewRequest("PUT", url, bytes.NewBuffer(jsonStr))
@@ -88,9 +94,10 @@ func setTicker() {
 	}
 	defer resp.Body.Close()
 
-	fmt.Println("response Status:", resp.Status)
+	// debug junk
+	//fmt.Println("response Status:", resp.Status)
 	//fmt.Println("response Headers:", resp.Header)
-	/*body, _ :=*/ ioutil.ReadAll(resp.Body)
+	//body, _ := ioutil.ReadAll(resp.Body)
 	//fmt.Println("response Body:", string(body))
 
 	u.Log("Ticker set!")
@@ -102,18 +109,19 @@ func pullPrice() error {
 	var myClient = &http.Client{Timeout: 10 * time.Second}
 
 	//r, err := myClient.Get("https://blockchain.info/ticker")
+	// get the top two cryptocurrencies converted to the desired currency (currently happens to be BTC and ETH)
 	r, err := myClient.Get("https://api.coinmarketcap.com/v1/ticker/?convert=" + u.Conf.Currency + "&limit=2")
 	if err != nil {
 		return err
 	}
 	defer r.Body.Close()
 
+	// old code as a backup in case coinmarketcap stops existing
 	/*body, err := ioutil.ReadAll(r.Body)
 	var f interface{}
 	json.Unmarshal(body, &f)
 	m := f.(map[string]interface{})
 	listing := m[u.Conf.Currency].(map[string]interface{})
-
 	price := fmt.Sprintf("%v", listing["last"])
 	symbol := fmt.Sprintf("%v", listing["symbol"])*/
 

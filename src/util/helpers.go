@@ -90,9 +90,9 @@ func trendToArrow(trend string) string {
 
 func fmtTrend(trend string) string {
 	if strings.Contains(trend, "-") {
-		return trend
+		return trend + "%"
 	}
-	return "+" + trend
+	return "+" + trend + "%"
 }
 
 // GenSSID takes prices and trends and generates the SSID of the ticker network
