@@ -14,7 +14,7 @@ The ticker can be run in one of two modes:
 
 ## Configuration
 
-First of all you obviously need control of a Meraki network with at least one active access point. This guide assumes you have knowledge of the Meraki cloud dashboard. It won't teach you how to create new SSIDs or any of that junk. That in mind, here are the steps to configuring the application to do our bidding:
+First of all, you obviously need control of a Meraki network with at least one active access point. This guide assumes you have knowledge of the Meraki cloud dashboard. It won't teach you how to create new SSIDs or any of that junk. That in mind, here are the steps to configuring the application to do our bidding:
 
 1. Enable the Merkai API at the bottom of the **Organization > Settings** Page.
 ![alt text](img/apienable.png "Enable API")
@@ -22,14 +22,15 @@ First of all you obviously need control of a Meraki network with at least one ac
 2. Generate an API key on the **Edit Account** Page
 ![alt text](img/apikey.png "Enable API")
 
-3. Create a new SSID under the **Wireless > SSIDs** Page. Name it whatever you want, it'll be renamed promptly by the application. Ensure it's secured properly and implement any firewall rules and traffic shaping as you see fit. This network shouldn't have any devices connect to it ever, so just fire and forget some obnoxiously long PSK.
+3. Create a new SSID under the **Wireless > SSIDs** Page. Name it whatever you want because it'll be renamed promptly by the application. Ensure it's secured properly and implement any firewall rules and traffic shaping as you see fit. This network shouldn't have any devices connect to it ever, so just fire and forget some obnoxiously long PSK.
+
 4. At this point you need to hit the API to get your Organization ID and your Network ID. Get the organization ID with this query. Be sure to fill in your API key header:
 
 ```bash
 curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/json' 'https://api.meraki.com/api/v0/organizations'
 ```
 
-5. It'll returns something like this, note the id in each object is what we're after:
+5. It'll return something like this, note the *id* field in each object is what we're after:
 
 ```json
 [
@@ -46,7 +47,7 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/json' 'https://api.meraki.com/api/v0/organizations/[organizationId]
 ```
 
-7. It'll return something like this, note the id in each object is what we're after:
+7. It'll return something like this, note the *id* field in each object is what we're after:
 
 ```json
 [
@@ -61,10 +62,10 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 ]
 ```
 
-8. Now you'll need to find the SSID number of the SSID that'll act as the ticker. This one's easy. Just go in and edit the SSID's settings and the number will be in the last part of the URL as shown here:
+8. Now you'll need to find the SSID number of the SSID that'll act as the ticker. This one's easy. Just go in and edit the SSID's settings in the Meraki Cloud Dashboard and the number will be in the last part of the URL as shown here:
 ![alt text](img/url.png "Enable API")
 
-9. At this point we have the information to allow the application to do its business. Make a copy of the config.example.json and call it config.json. Take your Meraki API key along with the NetworkID and SSID number we gathered and store them in the config.json as such:
+9. At this point we have all the information to allow the application to do its business. Make a copy of the config.example.json and call it config.json. Take your Meraki API key along with the NetworkID and SSID number we gathered and store them in the config.json as such:
 
 ```json
 {
@@ -95,7 +96,7 @@ Supported currency codes are: "AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "
 
 11. We're home free! Just build the application using **tools/build-(platform).sh** and run the application using **./ticker** located in the build directory
 
-12. Within seconds you should see the SSID set to the current crypto prices that you have enabled formatted like this:
+12. Within seconds you should see the SSID set to the current crypto prices that you have enabled. They'll be formatted like this:
 
 ```text
 BOTH Enabled:
@@ -109,6 +110,12 @@ or
 (ETH) ↑ $481 [+9.1%]
 ```
 
-## Information
+## Additional Information
 
-By default the application updates the prices once every minute. This can be changed using the *interval* configuration option. The value is set in minutes.
+By default the application updates the prices once every minute in service mode. This can be changed using the *interval* configuration option. The value is set in minutes.
+
+## Contributing
+
+PLEASE contribute to this project. I know it's a novelty, but it's got some interesting solutions to novelty engineering problems that nobody thinks of...
+
+That said, if there are issues, I'd love to know. Submit an issue or a PR if you're a proactive problem solver.
