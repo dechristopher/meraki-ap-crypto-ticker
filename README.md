@@ -1,4 +1,4 @@
-# Meraki SSID Cryptocurrency Ticker
+# Meraki SSID Crypto Ticker
 
 Ever wanted BTC or ETH prices available at a moment's notice from any WiFi enabled device? Look no further!
 
