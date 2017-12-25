@@ -16,7 +16,11 @@ The ticker can be run in one of two modes:
 
 ## Configuration
 
-First of all, you obviously need control of a Meraki network with at least one active access point. This guide assumes you have knowledge of the Meraki cloud dashboard. It won't teach you how to create new SSIDs or any of that junk. That in mind, here are the steps to configuring the application to do our bidding:
+First of all, you obviously need control of a Meraki network with at least one active access point. This guide assumes you have knowledge of the Meraki cloud dashboard. It won't teach you how to create new SSIDs or any of that junk.
+
+Make sure you clone this repo to **$GOPATH/src/github.com/dechristopher/meraki-ap-crypto-ticker** otherwise the dependeices won't pull properly. (Release builds will be released soon-ish...)
+
+That in mind, here are the steps to configuring the application to do our bidding:
 
 1. Enable the Merkai API at the bottom of the **Organization > Settings** Page.
 ![alt text](img/apienable.png "Enable API")
@@ -94,6 +98,12 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
 
 ```bash
 Supported currency codes are: "AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "DKK", "EUR", "GBP", "HKD", "HUF", "IDR", "ILS", "INR", "JPY", "KRW", "MXN", "MYR", "NOK", "NZD", "PHP", "PKR", "PLN", "RUB", "SEK", "SGD", "THB", "TRY", "TWD", "ZAR"
+```
+
+11. Before we can compile, we need to ensure we've got all the dependencies. To do this, make sure you're in the project src directory and run:
+
+```bash
+go get ./...
 ```
 
 11. We're home free! Just build the application using **tools/build-(platform).sh** and run the application using **./ticker** located in the build directory
