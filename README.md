@@ -18,7 +18,7 @@ The ticker can be run in one of two modes:
 
 First of all, you obviously need control of a Meraki network with at least one active access point. This guide assumes you have knowledge of the Meraki cloud dashboard. It won't teach you how to create new SSIDs or any of that junk.
 
-Make sure you clone this repo to **$GOPATH/src/github.com/dechristopher/meraki-ap-crypto-ticker** otherwise the dependeices won't pull properly. (Release builds will be released soon-ish...)
+Make sure you clone this repo to **$GOPATH/src/github.com/dechristopher/meraki-ap-crypto-ticker** if you plan to build the application yourself otherwise the dependeices won't pull properly. Pre-compiled builds can be found in the releases section. If using a pre-compiled build, skip steps 11 and 12 and just run the application binary after following steps 1-10
 
 That in mind, here are the steps to configuring the application to do our bidding:
 
@@ -90,9 +90,9 @@ curl -L -H 'X-Cisco-Meraki-API-Key: <key>' -X GET -H 'Content-Type: application/
     "networkid": "NETWORK_ID_HERE",
     "ssidnum": "SSID_NUMBER_HERE",
     "btc": true,
-    "eth": true,
+    "eth": false,
     "currency": "USD",
-    ...
+    "interval": 1
 }
 ```
 
@@ -106,9 +106,9 @@ Supported currency codes are: "AUD", "BRL", "CAD", "CHF", "CLP", "CNY", "CZK", "
 go get ./...
 ```
 
-11. We're home free! Just build the application using **tools/build-(platform).sh** and run the application using **./ticker** located in the build directory
+12. We're home free! Just build the application using **tools/build-(platform).sh** and run the application using **./ticker** located in the build directory
 
-12. Within seconds you should see the SSID set to the current crypto prices that you have enabled. They'll be formatted like this:
+13. Within seconds you should see the SSID set to the current crypto prices that you have enabled. They'll be formatted like this:
 
 ```text
 BOTH Enabled:
